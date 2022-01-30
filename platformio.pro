@@ -79,3 +79,5 @@ OTHER_FILES += platformio.ini
 SOURCES += src/main.cpp
 
 CONFIG += c++17
+
+HEADERS +=

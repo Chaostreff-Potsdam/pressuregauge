@@ -51,10 +51,6 @@ void loop() {
     client.println(".headertext{ font-weight:bold; font-family:Arial ; "
                    "text-align: center; color: brown ;}");
     client.println(".slider { width: 500px; }</style>");
-    client.println("<script "
-                   "src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/"
-                   "jquery.min.js\"></script>");
-
     client.println("</head><body><h1><u><div class = \"headertext\"> Smart Gas "
                    "Druck-Einsteller</u></h1>");
     client.println("<p><h3>Aktueller Druck</h3><span "
@@ -63,17 +59,17 @@ void loop() {
         "<input type=\"range\" min=\"0\" max=\"180\" class=\"slider\" "
         "id=\"servoSlider\" onchange=\"servo(this.value)\" value=\"" +
         valueString + "\"/>");
-
     client.println(
-        "<script>var slider = document.getElementById(\"servoSlider\");");
-    client.println("var servoP = document.getElementById(\"servoPos\"); "
-                   "servoP.innerHTML = slider.value / 180.0 * 300;");
-    client.println(
+        "<script>var slider = document.getElementById(\"servoSlider\");"
+        "var servoP = document.getElementById(\"servoPos\"); "
+        "servoP.innerHTML = slider.value / 180.0 * 300;"
         "slider.oninput = function() { slider.value = this.value; "
-        "servoP.innerHTML = Math.round(this.value / 180.0 * 300); }");
-    client.println("$.ajaxSetup({timeout:1000}); function servo(pos) { ");
-    client.println("$.get(\"/?value=\" + pos + \"&\"); {Connection:"
-                   "close};}</script>");
+        "servoP.innerHTML = Math.round(this.value / 180.0 * 300); };"
+        "function servo(pos) { "
+        "var request = new XMLHttpRequest();"
+        "request.open('GET', (\"/?value=\" + pos + \"&\"), true );"
+        "request.send();"
+        "}</script>");
     client.println("</body></html>");
 
     if (header.indexOf("GET /?value=") >= 0) {

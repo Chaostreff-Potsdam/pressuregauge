@@ -62,7 +62,7 @@ void loop() {
     client.println(
         "<script>var slider = document.getElementById(\"servoSlider\");"
         "var servoP = document.getElementById(\"servoPos\"); "
-        "servoP.innerHTML = slider.value / 180.0 * 300;"
+        "servoP.innerHTML = Math.round(slider.value / 180.0 * 300) ;"
         "slider.oninput = function() { slider.value = this.value; "
         "servoP.innerHTML = Math.round(this.value / 180.0 * 300); };"
         "function servo(pos) { "
